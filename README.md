@@ -52,7 +52,7 @@ sleepP(100).then(([ms, timestamp]) => {
 });
 ```
 
-## callbackify
+### callbackify
 
 ```javascript
 function sleepP(ms) {
@@ -72,7 +72,7 @@ sleep(100, (err, ms, timestamp) => {
 });
 ```
 
-## promisifyRequire
+### promisifyRequire
 
 ```javascript
 const fs = leiPromise.promisifyRequire('fs');
