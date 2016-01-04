@@ -52,6 +52,22 @@ sleepP(100).then(([ms, timestamp]) => {
 });
 ```
 
+If the `callback` function only return 1 argument, you can passed `returnFirstArgument=true` to `promisify()`:
+
+```javascript
+function sleep(ms, callback) {
+  setTimeout(() => callback(null, ms), ms);
+}
+
+const sleepP = leiPromise.promisify(sleep, null, true);
+
+sleepP(100).then(ms => {
+  console.log(`ms=${ms}`);
+}).catch((err) => {
+  console.error(err);
+});
+```
+
 ### callbackify
 
 ```javascript

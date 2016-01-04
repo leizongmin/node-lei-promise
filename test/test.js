@@ -79,6 +79,50 @@ describe('promisify', function () {
 
   });
 
+  it('returnFirstArgument=true', function (done) {
+
+    function sleep(ms, callback) {
+      console.log(`sleep(${ms})`);
+      setTimeout(function () {
+        console.log(`sleep(${ms}) callback`);
+        callback(null, ms);
+      }, ms);
+    }
+
+    let sleep2 = me.promisify(sleep, false, true);
+
+    sleep2(100).then(ms => {
+      console.log(ms);
+      assert.equal(ms, 100);
+      done();
+    }).catch(err => {
+      throw err;
+    });
+
+  });
+
+  it('argc=2', function (done) {
+
+    function sleep(ms, callback, a, b, c) {
+      console.log(`sleep(${ms})`);
+      setTimeout(function () {
+        console.log(`sleep(${ms}) callback`);
+        callback(null, ms);
+      }, ms);
+    }
+
+    let sleep2 = me.promisify(sleep, 2);
+
+    sleep2(100).then(([ms]) => {
+      console.log(ms);
+      assert.equal(ms, 100);
+      done();
+    }).catch(err => {
+      throw err;
+    });
+
+  });
+
   it('after promisify still callback', function (done) {
 
     function sleep(ms, callback) {
@@ -172,6 +216,29 @@ describe('callbackify', function () {
       console.log(err);
       assert.ok(err instanceof Error);
       assert.equal(err.code, 'just_test');
+      done();
+    });
+
+  });
+
+  it('argc=1', function (done) {
+
+    function sleep(ms, a, b, c) {
+      console.log(`sleep(${ms})`);
+      return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          console.log(`sleep(${ms}) resolve`);
+          resolve(ms);
+        }, ms);
+      });
+    }
+
+    let sleep2 = me.callbackify(sleep, 1);
+
+    sleep2(100, function (err, ms) {
+      console.log(err, ms);
+      assert.equal(err, null);
+      assert.equal(ms, 100);
       done();
     });
 
