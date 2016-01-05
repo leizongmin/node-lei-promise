@@ -9,6 +9,10 @@
 const assert = require('assert');
 const me = require('../');
 
+if (typeof Promise === 'undefined') {
+  global.Promise = require('bluebird');
+}
+
 describe('promisify', function () {
 
   it('passed 1 argument and callback 1 argument', function (done) {
