@@ -1,6 +1,6 @@
 {
   "name": "lei-promise",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "callback promisify & promise callbackify",
   "main": "lib/index.js",
   "scripts": {
