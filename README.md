@@ -100,6 +100,19 @@ fs.readdir(__dirname).then(([list]) => {
 });
 ```
 
+If all the `callback` function only return 1 argument, you can passed `returnFirstArgument=true` to `promisifyRequire()`:
+
+```javascript
+const fs = leiPromise.promisifyRequire('fs', true);
+
+fs.readdir(__dirname).then(list => {
+  console.log(list);
+}).catch((err) => {
+  console.error(err);
+});
+```
+
+
 ## License
 
 ```
