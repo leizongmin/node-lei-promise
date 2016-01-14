@@ -278,11 +278,50 @@ describe('callbackify', function () {
 describe('promisifyRequire', function () {
 
   const fs = me.promisifyRequire('fs');
-  const path = me.promisifyRequire('path');
 
   it('fs.readdir promise', function (done) {
 
     fs.readdir(__dirname).then(([list]) => {
+      console.log(list);
+      assert.ok(Array.isArray(list));
+      assert.ok(list.length > 0);
+      done();
+    }).catch(err => {
+      throw err;
+    });
+
+  });
+
+  it('fs.readdir callback', function (done) {
+
+    fs.readdir(__dirname, (err, list) => {
+      console.log(err, list);
+      assert.equal(err, null);
+      assert.ok(Array.isArray(list));
+      assert.ok(list.length > 0);
+      done();
+    });
+
+  });
+
+  it('fs.readdirSync', function () {
+
+    let list = fs.readdirSync(__dirname);
+    console.log(list);
+    assert.ok(Array.isArray(list));
+    assert.ok(list.length > 0);
+
+  });
+
+});
+
+describe('promisifyRequire(returnFirstArgument=true)', function () {
+
+  const fs = me.promisifyRequire('fs', true);
+
+  it('fs.readdir promise', function (done) {
+
+    fs.readdir(__dirname).then(list => {
       console.log(list);
       assert.ok(Array.isArray(list));
       assert.ok(list.length > 0);
