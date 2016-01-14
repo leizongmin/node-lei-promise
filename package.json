@@ -6,7 +6,8 @@
   "scripts": {
     "compile_test": "./node_modules/.bin/babel -x .es6 test -d test",
     "test": "npm run compile_test && ./node_modules/.bin/mocha -t 5000",
-    "cov": "npm run compile_test && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -t 5000",
+    "test-travis": "npm run coverage",
+    "coverage": "npm run compile_test && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -t 5000",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
   },
   "repository": {
