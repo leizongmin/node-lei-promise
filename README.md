@@ -22,6 +22,8 @@
 [download-url]: https://npmjs.org/package/lei-promise
 
 # lei-promise
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/leizongmin/node-lei-promise.svg)](https://greenkeeper.io/)
 callback promisify &amp; promise callbackify
 
 ## Installation
